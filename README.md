@@ -12,7 +12,7 @@
   5. [Destructuring](#destructuring)
   6. [Strings](#strings)
   7. [Functions](#functions)
-  8. [Iterators and Generators](#iterators-and-generators)
+  8. [Iterators](#iterators)
 
 ## Types
 
@@ -599,7 +599,7 @@
     }
     ```
 
-## Iterators and Generators
+## Iterators
 
   <a name="iterators--nope"></a><a name="8.1"></a>
   - [8.1](#iterators--nope) Don’t use iterators. Prefer JavaScript’s higher-order functions instead of loops like `for-in` or `for-of`.
