@@ -12,38 +12,7 @@
   5. [Destructuring](#destructuring)
   6. [Strings](#strings)
   7. [Functions](#functions)
-  8. [Arrow Functions](#arrow-functions)
-  9. [Classes & Constructors](#classes--constructors)
-  10. [Modules](#modules)
-  11. [Iterators and Generators](#iterators-and-generators)
-  12. [Properties](#properties)
-  13. [Variables](#variables)
-  14. [Hoisting](#hoisting)
-  15. [Comparison Operators & Equality](#comparison-operators--equality)
-  16. [Blocks](#blocks)
-  17. [Control Statements](#control-statements)
-  18. [Comments](#comments)
-  19. [Whitespace](#whitespace)
-  20. [Commas](#commas)
-  21. [Semicolons](#semicolons)
-  22. [Type Casting & Coercion](#type-casting--coercion)
-  23. [Naming Conventions](#naming-conventions)
-  24. [Accessors](#accessors)
-  25. [Events](#events)
-  26. [jQuery](#jquery)
-  27. [ECMAScript 5 Compatibility](#ecmascript-5-compatibility)
-  28. [ECMAScript 6+ (ES 2015+) Styles](#ecmascript-6-es-2015-styles)
-  29. [Standard Library](#standard-library)
-  31. [Testing](#testing)
-  32. [Performance](#performance)
-  33. [Resources](#resources)
-  34. [In the Wild](#in-the-wild)
-  35. [Translation](#translation)
-  36. [The JavaScript Style Guide Guide](#the-javascript-style-guide-guide)
-  37. [Chat With Us About JavaScript](#chat-with-us-about-javascript)
-  38. [Contributors](#contributors)
-  39. [License](#license)
-  40. [Amendments](#amendments)
+  8. [Iterators and Generators](#iterators-and-generators)
 
 ## Types
 
@@ -133,7 +102,7 @@
     // bad - a super unreadable one-liner
     var a = Array.prototype.slice.call(box.querySelectorAll('.videoCube')).filter(function (el, idx) { return idx % 2 === 0 })
 
-    // good - more code, but we can easily figure out what is happening
+    // good - more code, but the next dev can easily figure out what is happening
     var isEven = function isEven(element, idx) {
         return idx % 2 === 0;
     }
@@ -156,34 +125,9 @@
     // good
     var item = {};
     ```
-  
-  <a name="objects--maybe-monad"></a><a name="3.2"></a>
-  - [3.2](#objects--maybe-monad) Use the maybe monad to access properties on nested objects.
 
-    ```javascript
-    // bad - assumes that each of those properties exists which can easily lead to a TypeError
-    if (TRCImpl.feedsManager.configs['below-article-thumbs_ARC'].fti === 'tribunedigital-chicagotribune-feed-action-bucket-1569860912943'){
-    }
-
-    // bad - too verbose, not readable
-    if (
-        TRCImpl &&
-        TRCImpl.feedsManager && 
-        TRCImpl.feedsManager.configs && 
-        TRCImpl.feedsManager.configs['below-article-thumbs_ARC'] && 
-        TRCImpl.feedsManager.configs['below-article-thumbs_ARC'].fti === 'tribunedigital-chicagotribune-feed-action-bucket-1569860912943'){
-    }
-
-    // good - actionBucketId will either be the action bucket id or undefined. Either of those works to check for a specific actionBucketId value
-    var actionBucketId = ((((TRCImpl || {}).feedsManager || {}).configs || {})['below-article-thumbs_ARC'] || {}).fti
-
-    if (actionBucketId === 'tribunedigital-chicagotribune-feed-action-bucket-1569860912943') {
-
-    }
-    ```
-
-  <a name="no-es6-computed-properties"></a><a name="3.3"></a>
-  - [3.3](#no-es6-computed-properties) Do not use computed property names when creating objects with dynamic property names.
+  <a name="no-es6-computed-properties"></a><a name="3.2"></a>
+  - [3.2](#no-es6-computed-properties) Do not use computed property names when creating objects with dynamic property names.
 
     > Why? These are not supported in Internet Explorer.
 
@@ -208,8 +152,8 @@
     obj[getKey('enabled')] = true;
     ```
 
-  <a name="no-es6-object-shorthand"></a><a name="3.4"></a>
-  - [3.4](#no-es6-object-shorthand) Do not use object method shorthand. This is part of ES6 and is not supported in IE.
+  <a name="no-es6-object-shorthand"></a><a name="3.3"></a>
+  - [3.3](#no-es6-object-shorthand) Do not use object method shorthand. This is part of ES6 and is not supported in IE.
 
     ```javascript
     // bad
@@ -231,8 +175,8 @@
 
     ```
 
-  <a name="no-es6-object-concise"></a><a name="3.5"></a>
-  - [3.5](#no-es6-object-concise) Do not use property value shorthand. 
+  <a name="no-es6-object-concise"></a><a name="3.4"></a>
+  - [3.4](#no-es6-object-concise) Do not use property value shorthand. 
 
     > Why? ES6!
 
@@ -250,8 +194,8 @@
     };
     ```
 
-  <a name="objects--quoted-props"></a><a name="3.6"></a>
-  - [3.6](#objects--quoted-props) Only quote properties that are invalid identifiers.
+  <a name="objects--quoted-props"></a><a name="3.5"></a>
+  - [3.5](#objects--quoted-props) Only quote properties that are invalid identifiers.
 
     > Why? In general it is subjectively easier to read. It improves syntax highlighting, and is also more easily optimized by many JS engines.
 
@@ -271,8 +215,8 @@
     };
     ```
 
-  <a name="objects--prototype-builtins"></a><a name="3.7"></a>
-  - [3.7](#objects--prototype-builtins) Do not call `Object.prototype` methods directly, such as `hasOwnProperty`, `propertyIsEnumerable`, and `isPrototypeOf`.
+  <a name="objects--prototype-builtins"></a><a name="3.6"></a>
+  - [3.6](#objects--prototype-builtins) Do not call `Object.prototype` methods directly, such as `hasOwnProperty`, `propertyIsEnumerable`, and `isPrototypeOf`.
 
     > Why? These methods may be shadowed by properties on the object in question - consider `{ hasOwnProperty: false }` - or, the object may be a null object (`Object.create(null)`).
 
@@ -540,7 +484,7 @@
     // very bad (remember ALL of our javascript is a string)
     var foo = \"'this' is \"quoted\"\" 
 
-    // good
+    // good 
     var foo = '\'this\' is \"quoted\"';
     ```
 
@@ -630,3 +574,303 @@
     var x = function () {};
     var y = function a() {};
     ```
+
+<a name="functions--reassign-params"></a><a name="7.12"></a>
+  - [7.12](#functions--reassign-params) Never reassign parameters.
+
+    > Why? Reassigning parameters can lead to unexpected behavior, especially when accessing the `arguments` object. It can also cause optimization issues, especially in V8.
+
+    ```javascript
+    // bad
+    function f1(a) {
+      a = 1;
+      // ...
+    }
+
+    function f2(a) {
+      if (!a) { a = 1; }
+      // ...
+    }
+
+    // good
+    function f3(a) {
+      var b = a || 1;
+      // ...
+    }
+    ```
+
+## Iterators and Generators
+
+  <a name="iterators--nope"></a><a name="8.1"></a>
+  - [8.1](#iterators--nope) Don’t use iterators. Prefer JavaScript’s higher-order functions instead of loops like `for-in` or `for-of`.
+
+    > Why? This enforces our immutable rule. Dealing with pure functions that return values is easier to reason about than side effects.
+
+    > Use `forEach()` / `map()` / `every()` / `filter()` / `reduce()` / `some()` / ... to iterate over arrays, and `Object.keys()` to produce arrays so you can iterate over objects.
+
+    ```javascript
+    var numbers = [1, 2, 3, 4, 5];
+
+    // bad
+    var sum = 0;
+    for (var num of numbers) {
+      sum += num;
+    }
+    sum === 15;
+
+    // good
+    var sum = 0;
+    numbers.forEach(function (num) {
+      sum += num;
+    });
+    sum === 15;
+
+    // best (use the functional force)
+    var sum = numbers.reduce(function (total, num) {
+        return total + num
+    }, 0);
+    sum === 15;
+
+    // bad
+    var increasedByOne = [];
+    for (var i = 0; i < numbers.length; i++) {
+      increasedByOne.push(numbers[i] + 1);
+    }
+
+    // good
+    var increasedByOne = [];
+    numbers.forEach(function (num) {
+      increasedByOne.push(num + 1);
+    });
+
+    // best (keeping it functional)
+    var increasedByOne = numbers.map(function (num) { 
+        return num + 1 
+    });
+    ```
+
+
+## Properties
+
+  <a name="properties--dot"></a><a name="12.1"></a>
+  - [12.1](#properties--dot) Use dot notation when accessing properties.
+
+    ```javascript
+    var luke = {
+      jedi: true,
+      age: 28,
+    };
+
+    // bad
+    var isJedi = luke['jedi'];
+
+    // good
+    var isJedi = luke.jedi;
+    ```
+
+  <a name="properties--bracket"></a><a name="12.2"></a>
+  - [12.2](#properties--bracket) Use bracket notation `[]` when accessing properties with a variable.
+
+    ```javascript
+    var luke = {
+      jedi: true,
+      age: 28,
+    };
+
+    function getProp(prop) {
+      return luke[prop];
+    }
+
+    var isJedi = getProp('jedi');
+    ```
+  
+  <a name="properties--maybe-monad"></a><a name="12.3"></a>
+  - [12.3](#properties--maybe-monad) Use the maybe monad pattern to access properties on nested objects.
+
+    ```javascript
+    // bad - assumes that each of those properties exists -> TypeError
+    if (TRCImpl.feedsManager.configs['below-article-thumbs_ARC'].fti === 'tribunedigital-chicagotribune-feed-action-bucket-1569860912943'){
+    }
+
+    // bad - too verbose, not readable
+    if (
+        TRCImpl &&
+        TRCImpl.feedsManager && 
+        TRCImpl.feedsManager.configs && 
+        TRCImpl.feedsManager.configs['below-article-thumbs_ARC'] && 
+        TRCImpl.feedsManager.configs['below-article-thumbs_ARC'].fti === 'tribunedigital-chicagotribune-feed-action-bucket-1569860912943'){
+    }
+
+    // good - actionBucketId will either be the action bucket id or undefined. Either of those works to check for a specific actionBucketId value
+    var actionBucketId = ((((TRCImpl || {}).feedsManager || {}).configs || {})['below-article-thumbs_ARC'] || {}).fti
+
+    if (actionBucketId === 'tribunedigital-chicagotribune-feed-action-bucket-1569860912943') {
+
+    }
+    ```
+
+## Variables
+
+  <a name="variables--const"></a><a name="13.1"></a>
+  - [13.1](#variables--const) Always use `var` to declare variables. Not doing so will result in global variables. We want to avoid polluting the global namespace. Captain Planet warned us of that.
+
+    ```javascript
+    // bad
+    superPower = new SuperPower();
+
+    // good
+    var superPower = new SuperPower();
+    ```
+
+  <a name="variables--one-var"></a><a name="13.2"></a>
+  - [13.2](#variables--one-var) Use one `var` declaration per variable or assignment. eslint: [`one-var`](https://eslint.org/docs/rules/one-var.html)
+
+    > Why? It’s easier to add new variable declarations this way, and you never have to worry about swapping out a `;` for a `,` or introducing punctuation-only diffs. You can also step through each declaration with the debugger, instead of jumping through all of them at once.
+
+    ```javascript
+    // bad
+    var items = getItems(),
+        goSportsTeam = true,
+        dragonball = 'z';
+
+    // bad
+    // (compare to above, and try to spot the mistake)
+    var items = getItems(),
+        goSportsTeam = true;
+        dragonball = 'z';
+
+    // good
+    var items = getItems();
+    var goSportsTeam = true;
+    var dragonball = 'z';
+    ```
+
+<a name="variables--no-chain-assignment"></a><a name="13.3"></a>
+  - [13.3](#variables--no-chain-assignment) Don’t chain variable assignments. eslint: [`no-multi-assign`](https://eslint.org/docs/rules/no-multi-assign)
+
+    > Why? Chaining variable assignments creates implicit global variables.
+
+    ```javascript
+    // bad
+    (function example() {
+      // JavaScript interprets this as
+      // var a = ( b = ( c = 1 ) );
+      // The var keyword only applies to variable a; variables b and c become
+      // global variables.
+      var a = b = c = 1;
+    }());
+
+    console.log(a); // throws ReferenceError
+    console.log(b); // 1
+    console.log(c); // 1
+
+    // good
+    (function example() {
+      var a = 1;
+      var b = a;
+      var c = a;
+    }());
+
+    console.log(a); // throws ReferenceError
+    console.log(b); // throws ReferenceError
+    console.log(c); // throws ReferenceError
+
+    // the same applies for `const`
+    ```
+
+  <a name="variables--unary-increment-decrement"></a><a name="13.4"></a>
+  - [13.4](#variables--unary-increment-decrement) Avoid using unary increments and decrements (`++`, `--`).  eslint [`no-plusplus`](https://eslint.org/docs/rules/no-plusplus)
+
+    > Why? Per the eslint documenation, unary increment and decrement statements are subject to automatic semicolon insertion and can cause silent errors with incrementing or decrementing values within an application. It is also more expressive to mutate your values with statements like `num += 1` instead of `num++` or `num ++`. Disallowing unary increment and decrement statements also prevents you from pre-incrementing/pre-decrementing values unintentionally which can also cause unexpected behavior in your programs.
+
+    ```javascript
+    // bad
+
+    var array = [1, 2, 3];
+    var num = 1;
+    num++;
+    --num;
+
+    var sum = 0;
+    var truthyCount = 0;
+    for (var i = 0; i < array.length; i++) {
+      var value = array[i];
+      sum += value;
+      if (value) {
+        truthyCount++;
+      }
+    }
+
+    // good
+
+    var array = [1, 2, 3];
+    var num = 1;
+    num += 1;
+    num -= 1;
+
+    var sum = array.reduce(function (a, b) { 
+        return a + b 
+    }, 0);
+
+    var truthyCount = array.filter(Boolean).length;
+    ```
+
+<a name="variables--linebreak"></a>
+  - [13.5](#variables--linebreak) Avoid linebreaks before or after `=` in an assignment. If your assignment violates [`max-len`](https://eslint.org/docs/rules/max-len.html), surround the value in parens. eslint [`operator-linebreak`](https://eslint.org/docs/rules/operator-linebreak.html).
+
+    > Why? Linebreaks surrounding `=` can obfuscate the value of an assignment.
+
+    ```javascript
+    // bad
+    var foo =
+      superLongLongLongLongLongLongLongLongFunctionName();
+
+    // bad
+    var foo
+      = 'superLongLongLongLongLongLongLongLongString';
+
+    // good
+    var foo = (
+      superLongLongLongLongLongLongLongLongFunctionName()
+    );
+
+    // good
+    var foo = 'superLongLongLongLongLongLongLongLongString';
+    ```
+
+<a name="variables--no-unused-vars"></a>
+  - [13.8](#variables--no-unused-vars) Disallow unused variables.
+
+    > Why? Variables that are declared and not used anywhere in the code are most likely an error due to incomplete refactoring. Such variables take up space in the code and can lead to confusion by readers.
+
+    ```javascript
+    // bad
+
+    var some_unused_var = 42;
+
+    // Write-only variables are not considered as used.
+    var y = 10;
+    y = 5;
+
+    // A read for a modification of itself is not considered as used.
+    var z = 0;
+    z = z + 1;
+
+    // Unused function arguments.
+    function getX(x, y) {
+        return x;
+    }
+
+    // good
+
+    function getXPlusY(x, y) {
+      return x + y;
+    }
+
+    var x = 1;
+    var y = a + 2;
+
+    alert(getXPlusY(x, y));
+    ```
+
+**[⬆ back to top](#table-of-contents)**
