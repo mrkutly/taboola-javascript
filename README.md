@@ -705,8 +705,10 @@
 
 ## Variables
 
-  <a name="variables--const"></a><a name="10.1"></a>
-  - [10.1](#variables--const) Always use `var` to declare variables. Not doing so will result in global variables. We want to avoid polluting the global namespace. Captain Planet warned us of that.
+  <a name="variables--var"></a><a name="10.1"></a>
+  - [10.1](#variables--var) Always use `var` to declare variables. Not doing so will result in global variables. We want to avoid polluting the global namespace. Captain Planet warned us of that.
+    
+    > If you need to define a variable in one hook to use in other hooks, add it to the TRC object, which is global. Make sure your key name is unique!
 
     ```javascript
     // bad
@@ -714,6 +716,10 @@
 
     // good
     var superPower = new SuperPower();
+
+    // good if you need to access in another hook
+    TRC = TRC || {}
+    TRC._superPower = new SuperPower()
     ```
 
   <a name="variables--one-var"></a><a name="10.2"></a>
