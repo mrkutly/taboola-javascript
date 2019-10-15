@@ -712,14 +712,14 @@
 
     ```javascript
     // bad
-    superPower = new SuperPower();
+    superPower = getExposedToRadiation();
 
     // good
-    var superPower = new SuperPower();
+    var superPower = getExposedToRadiation();
 
     // good if you need to access in another hook
     TRC = TRC || {}
-    TRC._superPower = new SuperPower()
+    TRC._superPower = getExposedToRadiation()
     ```
 
   <a name="variables--one-var"></a><a name="10.2"></a>
