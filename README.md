@@ -23,7 +23,7 @@
   16. [Whitespace](#whitespace)
   17. [Commas](#commas)
   18. [Semicolons](#semicolons)
-  19. [Type Casting & Coercion](#coercion)
+  19. [Type Casting & Coercion](#type-casting--coercion)
   20. [Naming Conventions](#naming)
 
 ## Types
