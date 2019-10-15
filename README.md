@@ -1985,34 +1985,74 @@
   <a name="the-dom--query-selector"></a><a name="21.1"></a>
   - [21.1](#the-dom--query-selector) Use `querySelector` and `querySelectorAll` over `getElementById` and `getElementsByClassName`
 
-  ```javascript
-  // bad
-  var widgetSlots = box.getElementsByClassName('videoCube');
+    ```javascript
+    // bad
+    var widgetSlots = box.getElementsByClassName('videoCube');
 
-  // good
-  var widgetSlots = box.querySelectorAll('.videoCube');
-  ```
- 
-  <a name="the-dom--node-lists-and-html-element-collections"></a><a name="21.2"></a>
-  - [21.2](#the-dom--node-lists-and-html-element-collections) Use Function.prototype.apply with a `null` `this` argument to get arrays from NodeLists and HTMLElementCollections
-
-  ```javascript
-  // bad
-  var widgetSlots = box.getElementsByClassName('videoCube');
-  var slotArr = []
-
-  for (var i = 0; i < widgetSlots.length; i++) {
-    slotArr.push(widgetSlots[i])
-  }
-
-  // better
-  var widgetSlots = box.querySelectorAll('.videoCube');
-  var slotArr = Array.prototype.slice.call(widgetSlots)
+    // good
+    var widgetSlots = box.querySelectorAll('.videoCube');
+    ```
   
-  // best
-  var widgetSlots = box.querySelectorAll('.videoCube');
-  var slotArr = Array.apply(null, widgetSlots)
-  ```
+  <a name="the-dom--null-checking-elements"></a><a name="21.2"></a>
+  - [21.2](#the-dom--null-checking-elements) Make sure elements exist before manipulating them.
+
+    ```javascript
+    // bad
+    var widget = document.querySelector('.thumbnails-a');
+    widget.style.background = 'transparent';
+
+    // good
+    var widget = document.querySelector('.thumbnails-a');
+
+    if (!!widget) {
+      widget.style.background = 'transparent';
+    }
+    ```
+ 
+  <a name="the-dom--array-from-node-lists-and-html-element-collections"></a><a name="21.3"></a>
+  - [21.3](#the-dom--array-from-node-lists-and-html-element-collections) Use Function.prototype.apply with a `null` `this` argument to get arrays from NodeLists and HTMLElementCollections.
+
+    ```javascript
+    // bad
+    var widgetSlots = box.querySelectorAll('.videoCube');
+    var slotArr = [];
+
+    for (var i = 0; i < widgetSlots.length; i++) {
+      slotArr.push(widgetSlots[i]);
+    }
+
+    // better
+    var widgetSlots = box.querySelectorAll('.videoCube');
+    var slotArr = Array.prototype.slice.call(widgetSlots);
+    
+    // best
+    var widgetSlots = box.querySelectorAll('.videoCube');
+    var slotArr = Array.apply(null, widgetSlots);
+    ```
+ 
+  <a name="the-dom--node-lists-and-html-element-collections"></a><a name="21.3"></a>
+  - [21.3](#the-dom--node-lists-and-html-element-collections) Use Function.prototype.call to call Array.prototype methods on NodeLists and HTMLElementCollections.
+
+    > Why? If you need to map, filter, reduce, or iterate over (forEach) an NodeList or HTMLElementCollection, this saves you from creating an intermediate array.
+
+    ```javascript
+    // bad
+    var getText = function getTextFromTag(tag) {
+      return tag.innerText;
+    }
+  
+    var titleTags = box.querySelectorAll('.video-title');
+    var titleTagArray = Array.apply(null, titleTags);
+    var titles = titleTagArray.map(getText);
+
+    // good
+    var getText = function getTextFromTag(tag) {
+      return tag.innerText;
+    }
+
+    var titleTags = box.querySelectorAll('.video-title');
+    var titles = Array.prototype.map.call(titleTags, getTitle);
+    ```
 
 ## ECMAScript 5 Compatibility
 
