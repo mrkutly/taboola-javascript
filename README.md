@@ -2010,7 +2010,7 @@
     ```
  
   <a name="the-dom--array-from-node-lists-and-html-element-collections"></a><a name="21.3"></a>
-  - [21.3](#the-dom--array-from-node-lists-and-html-element-collections) Use Function.prototype.apply with a `null` `this` argument to get arrays from NodeLists and HTMLElementCollections.
+  - [21.3](#the-dom--array-from-node-lists-and-html-element-collections) Use `Function.prototype.apply` with a `null` `this` argument to get arrays from NodeLists and HTMLElementCollections.
 
     ```javascript
     // bad
@@ -2031,7 +2031,7 @@
     ```
  
   <a name="the-dom--node-lists-and-html-element-collections"></a><a name="21.4"></a>
-  - [21.4](#the-dom--node-lists-and-html-element-collections) Use Function.prototype.call to call Array.prototype methods on NodeLists and HTMLElementCollections.
+  - [21.4](#the-dom--node-lists-and-html-element-collections) Use `Function.prototype.call` to call `Array.prototype` methods on NodeLists and HTMLElementCollections.
 
     > Why? If you need to map, filter, reduce, or iterate over (forEach) an NodeList or HTMLElementCollection, this saves you from creating an intermediate array.
 
