@@ -557,8 +557,8 @@
     }
     ```
 
-  <a name="functions--signature-spacing"></a><a name="7.11"></a>
-  - [7.11](#functions--signature-spacing) Spacing in a function signature.
+  <a name="functions--signature-spacing"></a><a name="7.6"></a>
+  - [7.6](#functions--signature-spacing) Spacing in a function signature.
 
     > Why? Consistency is good, and you shouldn’t have to add or remove a space when adding or removing a name.
 
@@ -573,8 +573,8 @@
     var y = function a() {};
     ```
 
-<a name="functions--reassign-params"></a><a name="7.12"></a>
-  - [7.12](#functions--reassign-params) Never reassign parameters.
+<a name="functions--reassign-params"></a><a name="7.7"></a>
+  - [7.7](#functions--reassign-params) Never reassign parameters.
 
     > Why? Reassigning parameters can lead to unexpected behavior, especially when accessing the `arguments` object. It can also cause optimization issues, especially in V8.
 
@@ -1441,8 +1441,8 @@
     const x = y + 5;
     ```
 
-<a name="whitespace--after-blocks"></a><a name="16.7"></a>
-  - [16.7](#whitespace--after-blocks) Leave a blank line after blocks and before the next statement.
+<a name="whitespace--after-blocks"></a><a name="16.4"></a>
+  - [16.4](#whitespace--after-blocks) Leave a blank line after blocks and before the next statement.
 
     ```javascript
     // bad
@@ -1479,8 +1479,8 @@
     return arr;
     ```
 
-  <a name="whitespace--padded-blocks"></a><a name="16.8"></a>
-  - [16.8](#whitespace--padded-blocks) Do not pad your blocks with blank lines.
+  <a name="whitespace--padded-blocks"></a><a name="16.5"></a>
+  - [16.5](#whitespace--padded-blocks) Do not pad your blocks with blank lines.
 
     ```javascript
     // bad
@@ -1512,8 +1512,8 @@
     }
     ```
 
-  <a name="whitespace--no-multiple-blanks"></a>
-  - [16.9](#whitespace--no-multiple-blanks) Do not use multiple blank lines to pad your code.
+  <a name="whitespace--no-multiple-blanks"></a><a name="16.6"></a>
+  - [16.6](#whitespace--no-multiple-blanks) Do not use multiple blank lines to pad your code.
 
     ```javascript
     // bad
@@ -1532,8 +1532,8 @@
     }
     ```
 
-  <a name="whitespace--in-parens"></a><a name="16.9"></a>
-  - [16.9](#whitespace--in-parens) Do not add spaces inside parentheses.
+  <a name="whitespace--in-parens"></a><a name="16.7"></a>
+  - [16.7](#whitespace--in-parens) Do not add spaces inside parentheses.
 
     ```javascript
     // bad
@@ -1557,8 +1557,8 @@
     }
     ```
 
-  <a name="whitespace--in-brackets"></a><a name="16.10"></a>
-  - [16.10](#whitespace--in-brackets) Do not add spaces inside brackets.
+  <a name="whitespace--in-brackets"></a><a name="16.8"></a>
+  - [16.8](#whitespace--in-brackets) Do not add spaces inside brackets.
 
     ```javascript
     // bad
@@ -1570,8 +1570,8 @@
     console.log(foo[0]);
     ```
 
-  <a name="whitespace--in-braces"></a><a name="16.11"></a>
-  - [16.11](#whitespace--in-braces) Add spaces inside curly braces.
+  <a name="whitespace--in-braces"></a><a name="16.9"></a>
+  - [16.9](#whitespace--in-braces) Add spaces inside curly braces.
 
     ```javascript
     // bad
@@ -1581,8 +1581,8 @@
     var foo = { clark: 'kent' };
     ```
 
-  <a name="whitespace--max-len"></a><a name="16.12"></a>
-  - [16.12](#whitespace--max-len) Avoid having lines of code that are longer than 100 characters (including whitespace). Note: per [above](#strings--line-length), long strings are exempt from this rule, and should not be broken up.
+  <a name="whitespace--max-len"></a><a name="16.10"></a>
+  - [16.10](#whitespace--max-len) Avoid having lines of code that are longer than 100 characters (including whitespace). Note: per [above](#strings--line-length), long strings are exempt from this rule, and should not be broken up.
 
     > Why? This ensures readability and maintainability.
 
@@ -1599,8 +1599,8 @@
       && jsonData.foo.bar.baz.quux.xyzzy;
     ```
 
-  <a name="whitespace--block-spacing"></a>
-  - [16.13](#whitespace--block-spacing) Require consistent spacing inside an open block token and the next token on the same line. This rule also enforces consistent spacing inside a close block token and previous token on the same line.
+  <a name="whitespace--block-spacing"></a><a name="16.11"></a>
+  - [16.11](#whitespace--block-spacing) Require consistent spacing inside an open block token and the next token on the same line. This rule also enforces consistent spacing inside a close block token and previous token on the same line.
 
     ```javascript
     // bad
@@ -1612,8 +1612,8 @@
     if (foo) { bar = 0; }
     ```
 
-  <a name="whitespace--comma-spacing"></a>
-  - [16.14](#whitespace--comma-spacing) Avoid spaces before commas and require a space after commas.
+  <a name="whitespace--comma-spacing"></a><a name="16.12"></a>
+  - [16.12](#whitespace--comma-spacing) Avoid spaces before commas and require a space after commas.
 
     ```javascript
     // bad
@@ -1625,8 +1625,8 @@
     var arr = [1, 2];
     ```
 
-  <a name="whitespace--computed-property-spacing"></a>
-  - [16.15](#whitespace--computed-property-spacing) Enforce spacing inside of computed property brackets.
+  <a name="whitespace--computed-property-spacing"></a><a name="16.13"></a>
+  - [16.13](#whitespace--computed-property-spacing) Enforce spacing inside of computed property brackets.
 
     ```javascript
     // bad
@@ -1640,8 +1640,8 @@
     obj[foo[bar]]
     ```
 
-  <a name="whitespace--func-call-spacing"></a>
-  - [16.16](#whitespace--func-call-spacing) Avoid spaces between functions and their invocations.
+  <a name="whitespace--func-call-spacing"></a><a name="16.14"></a>
+  - [16.14](#whitespace--func-call-spacing) Avoid spaces between functions and their invocations.
 
     ```javascript
     // bad
@@ -1654,8 +1654,8 @@
     func();
     ```
 
-  <a name="whitespace--key-spacing"></a>
-  - [16.17](#whitespace--key-spacing) Enforce spacing between keys and values in object literal properties.
+  <a name="whitespace--key-spacing"></a><a name="16.15"></a>
+  - [16.15](#whitespace--key-spacing) Enforce spacing between keys and values in object literal properties.
 
     ```javascript
     // bad
@@ -1666,11 +1666,11 @@
     var obj = { "foo": 42 };
     ```
 
-  <a name="whitespace--no-trailing-spaces"></a>
-  - [16.18](#whitespace--no-trailing-spaces) Avoid trailing spaces at the end of lines.
+  <a name="whitespace--no-trailing-spaces"></a><a name="16.16"></a>
+  - [16.16](#whitespace--no-trailing-spaces) Avoid trailing spaces at the end of lines.
 
-  <a name="whitespace--no-multiple-empty-lines"></a>
-  - [16.19](#whitespace--no-multiple-empty-lines) Avoid multiple empty lines, only allow one newline at the end of files, and avoid a newline at the beginning of files.
+  <a name="whitespace--no-multiple-empty-lines"></a><a name="16.17"></a>
+  - [16.17](#whitespace--no-multiple-empty-lines) Avoid multiple empty lines, only allow one newline at the end of files, and avoid a newline at the beginning of files.
 
     ```javascript
     // bad - multiple empty lines
