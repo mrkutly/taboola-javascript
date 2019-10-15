@@ -17,6 +17,9 @@
   10. [Variables](#variables)
   11. [Hoisting](#hoisting)
   12. [Comparison Operators & Equality](#comparison-operators--equality)
+  13. [Blocks](#blocks)
+  14. [Control Statements](#control-statements)
+  15. [Comments](#comments)
 
 ## Types
 
@@ -700,11 +703,11 @@
 
     // bad - too verbose, not readable
     if (
-        TRCImpl &&
-        TRCImpl.feedsManager && 
-        TRCImpl.feedsManager.configs && 
-        TRCImpl.feedsManager.configs['below-article-thumbs_ARC'] && 
-        TRCImpl.feedsManager.configs['below-article-thumbs_ARC'].fti === 'tribunedigital-chicagotribune-feed-action-bucket-1569860912943'){
+        TRCImpl
+        && TRCImpl.feedsManager 
+        && TRCImpl.feedsManager.configs 
+        && TRCImpl.feedsManager.configs['below-article-thumbs_ARC'] 
+        && TRCImpl.feedsManager.configs['below-article-thumbs_ARC'].fti === 'tribunedigital-chicagotribune-feed-action-bucket-1569860912943'){
     }
 
     // good - actionBucketId will either be the action bucket id or undefined. Either of those works to check for a specific actionBucketId value
@@ -948,6 +951,9 @@
 
   <a name="comparison--eqeqeq"></a><a name="12.1"></a>
   - [12.1](#comparison--eqeqeq) Use `===` and `!==` over `==` and `!=`.
+    
+    > Why? `==` does not check for type equality and will attempt to coerce values compared into the same type. This can lead to unpredictable results (and is probably never what you actually want to do). It is also a very common typo to accidentally use `=` when you are defaulting to `==`. This can lead to lots of bugs and broken publisher websites.
+
 
   <a name="comparison--if"></a><a name="12.2"></a>
   - [12.2](#comparison--if) Conditional statements such as the `if` statement evaluate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules:
@@ -1078,5 +1084,302 @@
     ```
 
 **[⬆ back to top](#table-of-contents)**
+
+
+## Blocks
+
+  <a name="blocks--braces"></a><a name="13.1"></a>
+  - [13.1](#blocks--braces) Use braces with all multi-line blocks.
+
+    ```javascript
+    // bad
+    if (test)
+      return false;
+
+    // good
+    if (test) return false;
+
+    // good
+    if (test) {
+      return false;
+    }
+
+    // bad
+    function foo() { return false; }
+
+    // good
+    function bar() {
+      return false;
+    }
+    ```
+
+  <a name="blocks--cuddled-elses"></a><a name="13.2"></a>
+  - [13.2](#blocks--cuddled-elses) If you’re using multi-line blocks with `if` and `else`, put `else` on the same line as your `if` block’s closing brace.
+
+    ```javascript
+    // bad
+    if (test) {
+      thing1();
+      thing2();
+    }
+    else {
+      thing3();
+    }
+
+    // good
+    if (test) {
+      thing1();
+      thing2();
+    } else {
+      thing3();
+    }
+    ```
+
+  <a name="blocks--no-else-return"></a><a name="13.3"></a>
+  - [13.3](#blocks--no-else-return) If an `if` block always executes a `return` statement, the subsequent `else` block is unnecessary. A `return` in an `else if` block following an `if` block that contains a `return` can be separated into multiple `if` blocks.
+
+    ```javascript
+    // bad
+    function foo() {
+      if (x) {
+        return x;
+      } else {
+        return y;
+      }
+    }
+
+    // bad
+    function cats() {
+      if (x) {
+        return x;
+      } else if (y) {
+        return y;
+      }
+    }
+
+    // bad
+    function dogs() {
+      if (x) {
+        return x;
+      } else {
+        if (y) {
+          return y;
+        }
+      }
+    }
+
+    // good
+    function foo() {
+      if (x) {
+        return x;
+      }
+
+      return y;
+    }
+
+    // good
+    function cats() {
+      if (x) {
+        return x;
+      }
+
+      if (y) {
+        return y;
+      }
+    }
+
+    // good
+    function dogs(x) {
+      if (x) {
+        if (z) {
+          return y;
+        }
+      } else {
+        return z;
+      }
+    }
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+
+## Control Statements
+
+  <a name="control-statements"></a>
+  - [14.1](#control-statements) In case your control statement (`if`, `while` etc.) gets too long or exceeds the maximum line length, each (grouped) condition could be put into a new line. The logical operator should begin the line.
+
+    > Why? Requiring operators at the beginning of the line keeps the operators aligned and follows a pattern similar to method chaining. This also improves readability by making it easier to visually follow complex logic.
+
+    ```javascript
+    // bad
+    if ((foo === 123 || bar === 'abc') && doesItLookGoodWhenItBecomesThatLong() && isThisReallyHappening()) {
+      thing1();
+    }
+
+    // bad
+    if (foo === 123 &&
+      bar === 'abc') {
+      thing1();
+    }
+
+    // bad
+    if (foo === 123
+      && bar === 'abc') {
+      thing1();
+    }
+
+    // bad
+    if (
+      foo === 123 &&
+      bar === 'abc'
+    ) {
+      thing1();
+    }
+
+    // good
+    if (
+      foo === 123
+      && bar === 'abc'
+    ) {
+      thing1();
+    }
+
+    // good
+    if (
+      (foo === 123 || bar === 'abc')
+      && doesItLookGoodWhenItBecomesThatLong()
+      && isThisReallyHappening()
+    ) {
+      thing1();
+    }
+
+    // good
+    if (foo === 123 && bar === 'abc') {
+      thing1();
+    }
+    ```
+
+  <a name="control-statement--value-selection"></a><a name="control-statements--value-selection"></a>
+  - [14.2](#control-statements--value-selection) Don't use selection operators in place of control statements.
+
+    ```javascript
+    // bad
+    !isRunning && startRunning();
+
+    // good
+    if (!isRunning) {
+      startRunning();
+    }
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Comments
+
+  <a name="comments--multiline"></a><a name="15.1"></a>
+  - [15.1](#comments--multiline) Use `/** ... */` for multi-line comments.
+
+    ```javascript
+    // bad
+    // make() returns a new element
+    // based on the passed in tag name
+    //
+    // @param {String} tag
+    // @return {Element} element
+    function make(tag) {
+
+      // ...
+
+      return element;
+    }
+
+    // good
+    /**
+     * make() returns a new element
+     * based on the passed-in tag name
+     */
+    function make(tag) {
+
+      // ...
+
+      return element;
+    }
+    ```
+
+  <a name="comments--singleline"></a><a name="15.2"></a>
+  - [15.2](#comments--singleline) Use `//` for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment unless it’s on the first line of a block.
+
+    ```javascript
+    // bad
+    var active = true;  // is current tab
+
+    // good
+    // is current tab
+    var active = true;
+
+    // bad
+    function getType() {
+      console.log('fetching type...');
+      // set the default type to 'no type'
+      var type = this.type || 'no type';
+
+      return type;
+    }
+
+    // good
+    function getType() {
+      console.log('fetching type...');
+
+      // set the default type to 'no type'
+      var type = this.type || 'no type';
+
+      return type;
+    }
+
+    // also good
+    function getType() {
+      // set the default type to 'no type'
+      var type = this.type || 'no type';
+
+      return type;
+    }
+    ```
+
+  <a name="comments--spaces"></a><a name="15.3"></a>
+  - [15.3](#comments--spaces) Start all comments with a space to make it easier to read.
+
+    ```javascript
+    // bad
+    //is current tab
+    var active = true;
+
+    // good
+    // is current tab
+    var active = true;
+
+    // bad
+    /**
+     *make() returns a new element
+     *based on the passed-in tag name
+     */
+    function make(tag) {
+
+      // ...
+
+      return element;
+    }
+
+    // good
+    /**
+     * make() returns a new element
+     * based on the passed-in tag name
+     */
+    function make(tag) {
+
+      // ...
+
+      return element;
+    }
+    ```
 
 # };
