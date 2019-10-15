@@ -13,6 +13,10 @@
   6. [Strings](#strings)
   7. [Functions](#functions)
   8. [Iterators](#iterators)
+  9. [Properties](#properties)
+  10. [Variables](#variables)
+  11. [Hoisting](#hoisting)
+  12. [Comparison Operators & Equality](#comparison-operators--equality)
 
 ## Types
 
@@ -599,6 +603,8 @@
     }
     ```
 
+**[⬆ back to top](#table-of-contents)**
+
 ## Iterators
 
   <a name="iterators--nope"></a><a name="8.1"></a>
@@ -652,8 +658,8 @@
 
 ## Properties
 
-  <a name="properties--dot"></a><a name="12.1"></a>
-  - [12.1](#properties--dot) Use dot notation when accessing properties.
+  <a name="properties--dot"></a><a name="9.1"></a>
+  - [9.1](#properties--dot) Use dot notation when accessing properties.
 
     ```javascript
     var luke = {
@@ -668,8 +674,8 @@
     var isJedi = luke.jedi;
     ```
 
-  <a name="properties--bracket"></a><a name="12.2"></a>
-  - [12.2](#properties--bracket) Use bracket notation `[]` when accessing properties with a variable.
+  <a name="properties--bracket"></a><a name="9.2"></a>
+  - [9.2](#properties--bracket) Use bracket notation `[]` when accessing properties with a variable.
 
     ```javascript
     var luke = {
@@ -684,8 +690,8 @@
     var isJedi = getProp('jedi');
     ```
   
-  <a name="properties--maybe-monad"></a><a name="12.3"></a>
-  - [12.3](#properties--maybe-monad) Use the maybe monad pattern to access properties on nested objects.
+  <a name="properties--maybe-monad"></a><a name="9.3"></a>
+  - [9.3](#properties--maybe-monad) Use the maybe monad pattern to access properties on nested objects.
 
     ```javascript
     // bad - assumes that each of those properties exists -> TypeError
@@ -711,8 +717,8 @@
 
 ## Variables
 
-  <a name="variables--const"></a><a name="13.1"></a>
-  - [13.1](#variables--const) Always use `var` to declare variables. Not doing so will result in global variables. We want to avoid polluting the global namespace. Captain Planet warned us of that.
+  <a name="variables--const"></a><a name="10.1"></a>
+  - [10.1](#variables--const) Always use `var` to declare variables. Not doing so will result in global variables. We want to avoid polluting the global namespace. Captain Planet warned us of that.
 
     ```javascript
     // bad
@@ -722,8 +728,8 @@
     var superPower = new SuperPower();
     ```
 
-  <a name="variables--one-var"></a><a name="13.2"></a>
-  - [13.2](#variables--one-var) Use one `var` declaration per variable or assignment. eslint: [`one-var`](https://eslint.org/docs/rules/one-var.html)
+  <a name="variables--one-var"></a><a name="10.2"></a>
+  - [10.2](#variables--one-var) Use one `var` declaration per variable or assignment. eslint: [`one-var`](https://eslint.org/docs/rules/one-var.html)
 
     > Why? It’s easier to add new variable declarations this way, and you never have to worry about swapping out a `;` for a `,` or introducing punctuation-only diffs. You can also step through each declaration with the debugger, instead of jumping through all of them at once.
 
@@ -745,8 +751,8 @@
     var dragonball = 'z';
     ```
 
-<a name="variables--no-chain-assignment"></a><a name="13.3"></a>
-  - [13.3](#variables--no-chain-assignment) Don’t chain variable assignments. eslint: [`no-multi-assign`](https://eslint.org/docs/rules/no-multi-assign)
+<a name="variables--no-chain-assignment"></a><a name="10.3"></a>
+  - [10.3](#variables--no-chain-assignment) Don’t chain variable assignments. eslint: [`no-multi-assign`](https://eslint.org/docs/rules/no-multi-assign)
 
     > Why? Chaining variable assignments creates implicit global variables.
 
@@ -778,8 +784,8 @@
     // the same applies for `const`
     ```
 
-  <a name="variables--unary-increment-decrement"></a><a name="13.4"></a>
-  - [13.4](#variables--unary-increment-decrement) Avoid using unary increments and decrements (`++`, `--`).  eslint [`no-plusplus`](https://eslint.org/docs/rules/no-plusplus)
+  <a name="variables--unary-increment-decrement"></a><a name="10.4"></a>
+  - [10.4](#variables--unary-increment-decrement) Avoid using unary increments and decrements (`++`, `--`).  eslint [`no-plusplus`](https://eslint.org/docs/rules/no-plusplus)
 
     > Why? Per the eslint documenation, unary increment and decrement statements are subject to automatic semicolon insertion and can cause silent errors with incrementing or decrementing values within an application. It is also more expressive to mutate your values with statements like `num += 1` instead of `num++` or `num ++`. Disallowing unary increment and decrement statements also prevents you from pre-incrementing/pre-decrementing values unintentionally which can also cause unexpected behavior in your programs.
 
@@ -815,8 +821,8 @@
     var truthyCount = array.filter(Boolean).length;
     ```
 
-<a name="variables--linebreak"></a>
-  - [13.5](#variables--linebreak) Avoid linebreaks before or after `=` in an assignment. If your assignment violates [`max-len`](https://eslint.org/docs/rules/max-len.html), surround the value in parens. eslint [`operator-linebreak`](https://eslint.org/docs/rules/operator-linebreak.html).
+<a name="variables--linebreak"></a><a name="10.5"></a>
+  - [10.5](#variables--linebreak) Avoid linebreaks before or after `=` in an assignment. If your assignment violates [`max-len`](https://eslint.org/docs/rules/max-len.html), surround the value in parens. eslint [`operator-linebreak`](https://eslint.org/docs/rules/operator-linebreak.html).
 
     > Why? Linebreaks surrounding `=` can obfuscate the value of an assignment.
 
@@ -838,8 +844,8 @@
     var foo = 'superLongLongLongLongLongLongLongLongString';
     ```
 
-<a name="variables--no-unused-vars"></a>
-  - [13.8](#variables--no-unused-vars) Disallow unused variables.
+<a name="variables--no-unused-vars"></a><a name="10.6"></a>
+  - [10.6](#variables--no-unused-vars) Disallow unused variables.
 
     > Why? Variables that are declared and not used anywhere in the code are most likely an error due to incomplete refactoring. Such variables take up space in the code and can lead to confusion by readers.
 
@@ -877,8 +883,8 @@
 
 ## Hoisting
 
-  <a name="hoisting--anon-expressions"></a><a name="14.1"></a>
-  - [14.1](#hoisting--anon-expressions) Anonymous function expressions hoist their variable name, but not the function assignment.
+  <a name="hoisting--anon-expressions"></a><a name="11.1"></a>
+  - [11.1](#hoisting--anon-expressions) Anonymous function expressions hoist their variable name, but not the function assignment.
 
     ```javascript
     function example() {
@@ -892,8 +898,8 @@
     }
     ```
 
-  <a name="hoisting--named-expresions"></a><a name="hoisting--named-expressions"></a><a name="14.2"></a>
-  - [14.2](#hoisting--named-expressions) Named function expressions hoist the variable name, not the function name or the function body.
+  <a name="hoisting--named-expresions"></a><a name="hoisting--named-expressions"></a><a name="11.2"></a>
+  - [11.2](#hoisting--named-expressions) Named function expressions hoist the variable name, not the function name or the function body.
 
     ```javascript
     function example() {
@@ -921,8 +927,8 @@
     }
     ```
 
-  <a name="hoisting--declarations"></a><a name="14.5"></a>
-  - [14.5](#hoisting--declarations) Function declarations hoist their name and the function body.
+  <a name="hoisting--declarations"></a><a name="11.3"></a>
+  - [11.3](#hoisting--declarations) Function declarations hoist their name and the function body.
 
     ```javascript
     function example() {
@@ -940,11 +946,11 @@
 
 ## Comparison Operators & Equality
 
-  <a name="comparison--eqeqeq"></a><a name="15.1"></a>
-  - [15.1](#comparison--eqeqeq) Use `===` and `!==` over `==` and `!=`.
+  <a name="comparison--eqeqeq"></a><a name="12.1"></a>
+  - [12.1](#comparison--eqeqeq) Use `===` and `!==` over `==` and `!=`.
 
-  <a name="comparison--if"></a><a name="15.2"></a>
-  - [15.2](#comparison--if) Conditional statements such as the `if` statement evaluate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules:
+  <a name="comparison--if"></a><a name="12.2"></a>
+  - [12.2](#comparison--if) Conditional statements such as the `if` statement evaluate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules:
 
     - **Objects** evaluate to **true**
     - **Undefined** evaluates to **false**
@@ -961,8 +967,8 @@
     ```
 
 
-  <a name="comparison--shortcuts"></a><a name="15.3"></a>
-  - [15.3](#comparison--shortcuts) Use shortcuts for booleans, but explicit comparisons for strings and numbers.
+  <a name="comparison--shortcuts"></a><a name="12.3"></a>
+  - [12.3](#comparison--shortcuts) Use shortcuts for booleans, but explicit comparisons for strings and numbers.
 
     ```javascript
     // bad
@@ -996,11 +1002,11 @@
     }
     ```
 
-  <a name="comparison--moreinfo"></a><a name="15.4"></a>
-  - [15.4](#comparison--moreinfo) For more information see [Truth Equality and JavaScript](https://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/#more-2108) by Angus Croll.
+  <a name="comparison--moreinfo"></a><a name="12.4"></a>
+  - [12.4](#comparison--moreinfo) For more information see [Truth Equality and JavaScript](https://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/#more-2108) by Angus Croll.
 
-  <a name="comparison--nested-ternaries"></a><a name="15.5"></a>
-  - [15.5](#comparison--nested-ternaries) Ternaries should not be nested and generally be single line expressions.
+  <a name="comparison--nested-ternaries"></a><a name="12.5"></a>
+  - [12.5](#comparison--nested-ternaries) Ternaries should not be nested and generally be single line expressions.
 
     ```javascript
     // bad
@@ -1020,8 +1026,8 @@
     var foo = maybe1 > maybe2 ? 'bar' : maybeNull;
     ```
 
-  <a name="comparison--unneeded-ternary"></a><a name="15.6"></a>
-  - [15.6](#comparison--unneeded-ternary) Avoid unneeded ternary statements.
+  <a name="comparison--unneeded-ternary"></a><a name="12.6"></a>
+  - [12.6](#comparison--unneeded-ternary) Avoid unneeded ternary statements.
 
     ```javascript
     // bad
@@ -1035,8 +1041,8 @@
     var baz = !c;
     ```
 
-  <a name="comparison--no-mixed-operators"></a>
-  - [15.6](#comparison--no-mixed-operators) When mixing operators, enclose them in parentheses. The only exception is the standard arithmetic operators: `+`, `-`, and `**` since their precedence is broadly understood. We recommend enclosing `/` and `*` in parentheses because their precedence can be ambiguous when they are mixed.
+  <a name="comparison--no-mixed-operators"></a><a name="12.7"></a>
+  - [12.7](#comparison--no-mixed-operators) When mixing operators, enclose them in parentheses. The only exception is the standard arithmetic operators: `+`, `-`, and `**` since their precedence is broadly understood. We recommend enclosing `/` and `*` in parentheses because their precedence can be ambiguous when they are mixed.
 
     > Why? This improves readability and clarifies the developer’s intention.
 
@@ -1072,3 +1078,4 @@
     ```
 
 **[⬆ back to top](#table-of-contents)**
+
