@@ -24,7 +24,9 @@
   17. [Commas](#commas)
   18. [Semicolons](#semicolons)
   19. [Type Casting & Coercion](#type-casting--coercion)
-  20. [Naming Conventions](#naming)
+  20. [Naming Conventions](#naming-conventions)
+  21. [The DOM](#the-dom)
+  22. [ECMAScript 5 Compatibility](#ecmascript-5-compatibility)
 
 ## Types
 
@@ -276,8 +278,8 @@
     var itemsCopy = items.slice(0);
     ```
 
-  <a name="arrays--callback-return"></a><a name="4.5"></a>
-  - [4.7](#arrays--callback-return) Use return statements in array method callbacks. Do not use arrow functions.
+  <a name="arrays--callback-return"></a><a name="4.4"></a>
+  - [4.4](#arrays--callback-return) Use return statements in array method callbacks. Do not use arrow functions.
 
     ```javascript
     // good
@@ -323,8 +325,8 @@
     });
     ```
 
-  <a name="arrays--bracket-newline"></a>
-  - [4.8](#arrays--bracket-newline) Use line breaks after open and before close array brackets if an array has multiple lines
+  <a name="arrays--bracket-newline"></a><a name="4.5"></a>
+  - [4.5](#arrays--bracket-newline) Use line breaks after open and before close array brackets if an array has multiple lines
 
     ```javascript
     // bad
@@ -1977,6 +1979,51 @@
     var thisIsMyObject = {};
     function thisIsMyFunction() {}
     ```
+**[⬆ back to top](#table-of-contents)**
+
+## The Dom
+  <a name="the-dom--query-selector"></a><a name="21.1"></a>
+  - [21.1](#the-dom--query-selector) Use `querySelector` and `querySelectorAll` over `getElementById` and `getElementsByClassName`
+
+  ```javascript
+  // bad
+  var widgetSlots = box.getElementsByClassName('videoCube');
+
+  // good
+  var widgetSlots = box.querySelectorAll('.videoCube');
+  ```
+ 
+  <a name="the-dom--node-lists-and-html-element-collections"></a><a name="21.2"></a>
+  - [21.2](#the-dom--node-lists-and-html-element-collections) Use Function.prototype.apply with a `null` `this` argument to get arrays from NodeLists and HTMLElementCollections
+
+  ```javascript
+  // bad
+  var widgetSlots = box.getElementsByClassName('videoCube');
+  var slotArr = []
+
+  for (var i = 0; i < widgetSlots.length; i++) {
+    slotArr.push(widgetSlots[i])
+  }
+
+  // better
+  var widgetSlots = box.querySelectorAll('.videoCube');
+  var slotArr = Array.prototype.slice.call(widgetSlots)
+  
+  // best
+  var widgetSlots = box.querySelectorAll('.videoCube');
+  var slotArr = Array.apply(null, widgetSlots)
+  ```
+
+## ECMAScript 5 Compatibility
+
+  <a name="es5-compat--kangax"></a><a name="22.1"></a>
+  - [22.1](#es5-compat--kangax) Refer to [Kangax](https://twitter.com/kangax/)’s ES5 [compatibility table](https://kangax.github.io/es5-compat-table/).
+
+  <a name="es5-compat--mdn"></a><a name="22.2"></a>
+  - [22.3](#es5-compat--mdn) Refer to [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference) to check for supported API's.
+
+**[⬆ back to top](#table-of-contents)**
+
 
 # };
 
