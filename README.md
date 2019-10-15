@@ -1,6 +1,6 @@
 # Taboola CSD JavaScript Style Guide() {
 
-*Taken from the [Airbnb Style Guide](https://github.com/airbnb/javascript), but IE compatible.*
+*Based on the [Airbnb Style Guide](https://github.com/airbnb/javascript), but IE compatible.*
 
 
 ## Table of Contents
@@ -20,6 +20,11 @@
   13. [Blocks](#blocks)
   14. [Control Statements](#control-statements)
   15. [Comments](#comments)
+  16. [Whitespace](#whitespace)
+  17. [Commas](#commas)
+  18. [Semicolons](#semicolons)
+  19. [Type Casting & Coercion](#coercion)
+  20. [Naming Conventions](#naming)
 
 ## Types
 
@@ -100,22 +105,6 @@
     })()
 
     console.log(hello); // ReferenceError
-    ```
-
-  <a name="references--semantic-names"></a><a name="2.3"></a>
-  - [2.3](#references--semantic-names) Use readable, meaningful variable names.
-
-    ```javascript
-    // bad - a super unreadable one-liner
-    var a = Array.prototype.slice.call(box.querySelectorAll('.videoCube')).filter(function (el, idx) { return idx % 2 === 0 })
-
-    // good - more code, but the next dev can easily figure out what is happening
-    var isEven = function isEven(element, idx) {
-        return idx % 2 === 0;
-    }
-    var widgetSlotNodes = box.querySelectorAll('.videoCube')
-    var widgetSlotArray = Array.prototype.slice.call(widgetSlotNodes)
-    var evenSlots = widgetSlotArray.filter(isEven)
     ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -693,28 +682,24 @@
     var isJedi = getProp('jedi');
     ```
   
-  <a name="properties--maybe-monad"></a><a name="9.3"></a>
-  - [9.3](#properties--maybe-monad) Use the maybe monad pattern to access properties on nested objects.
+  <a name="properties--nested"></a><a name="9.3"></a>
+  - [9.3](#properties--nested) Use short-circuiting with the `&&` operator to check for undefined values.
 
     ```javascript
     // bad - assumes that each of those properties exists -> TypeError
-    if (TRCImpl.feedsManager.configs['below-article-thumbs_ARC'].fti === 'tribunedigital-chicagotribune-feed-action-bucket-1569860912943'){
+    if (TRCImpl.feedsManager.configs['below-article-thumbs_ARC'].fti === 'tribunedigital-chicagotribune-feed-action-bucket-1569860912943') {
+      // some code
     }
 
-    // bad - too verbose, not readable
+    // good - won't throw an error
     if (
         TRCImpl
         && TRCImpl.feedsManager 
         && TRCImpl.feedsManager.configs 
         && TRCImpl.feedsManager.configs['below-article-thumbs_ARC'] 
-        && TRCImpl.feedsManager.configs['below-article-thumbs_ARC'].fti === 'tribunedigital-chicagotribune-feed-action-bucket-1569860912943'){
-    }
-
-    // good - actionBucketId will either be the action bucket id or undefined. Either of those works to check for a specific actionBucketId value
-    var actionBucketId = ((((TRCImpl || {}).feedsManager || {}).configs || {})['below-article-thumbs_ARC'] || {}).fti
-
-    if (actionBucketId === 'tribunedigital-chicagotribune-feed-action-bucket-1569860912943') {
-
+        && TRCImpl.feedsManager.configs['below-article-thumbs_ARC'].fti === 'tribunedigital-chicagotribune-feed-action-bucket-1569860912943'
+    ) {
+      // some code
     }
     ```
 
@@ -1381,5 +1366,612 @@
       return element;
     }
     ```
+**[⬆ back to top](#table-of-contents)**
+
+## Whitespace
+
+<a name="whitespace--before-blocks"></a><a name="16.1"></a>
+  - [16.1](#whitespace--before-blocks) Place 1 space before the leading brace.
+
+    ```javascript
+    // bad
+    function test(){
+      console.log('test');
+    }
+
+    // good
+    function test() {
+      console.log('test');
+    }
+
+    // bad
+    dog.set('attr',{
+      age: '1 year',
+      breed: 'Bernese Mountain Dog',
+    });
+
+    // good
+    dog.set('attr', {
+      age: '1 year',
+      breed: 'Bernese Mountain Dog',
+    });
+    ```
+
+  <a name="whitespace--around-keywords"></a><a name="16.2"></a>
+  - [16.2](#whitespace--around-keywords) Place 1 space before the opening parenthesis in control statements (`if`, `while` etc.). Place no space between the argument list and the function name in function calls and declarations.
+
+    ```javascript
+    // bad
+    if(isJedi) {
+      fight ();
+    }
+
+    // good
+    if (isJedi) {
+      fight();
+    }
+
+    // bad
+    function fight () {
+      console.log ('Swooosh!');
+    }
+
+    // good
+    function fight() {
+      console.log('Swooosh!');
+    }
+    ```
+
+  <a name="whitespace--infix-ops"></a><a name="16.3"></a>
+  - [16.3](#whitespace--infix-ops) Set off operators with spaces.
+
+    ```javascript
+    // bad
+    const x=y+5;
+
+    // good
+    const x = y + 5;
+    ```
+
+<a name="whitespace--after-blocks"></a><a name="16.7"></a>
+  - [16.7](#whitespace--after-blocks) Leave a blank line after blocks and before the next statement.
+
+    ```javascript
+    // bad
+    if (foo) {
+      return bar;
+    }
+    return baz;
+
+    // good
+    if (foo) {
+      return bar;
+    }
+
+    return baz;
+
+    // bad
+    var arr = [
+      function foo() {
+      },
+      function bar() {
+      },
+    ];
+    return arr;
+
+    // good
+    var arr = [
+      function foo() {
+      },
+
+      function bar() {
+      },
+    ];
+
+    return arr;
+    ```
+
+  <a name="whitespace--padded-blocks"></a><a name="16.8"></a>
+  - [16.8](#whitespace--padded-blocks) Do not pad your blocks with blank lines.
+
+    ```javascript
+    // bad
+    function bar() {
+
+      console.log(foo);
+
+    }
+
+    // bad
+    if (baz) {
+
+      console.log(qux);
+    } else {
+      console.log(foo);
+
+    }
+
+    // good
+    function bar() {
+      console.log(foo);
+    }
+
+    // good
+    if (baz) {
+      console.log(qux);
+    } else {
+      console.log(foo);
+    }
+    ```
+
+  <a name="whitespace--no-multiple-blanks"></a>
+  - [16.9](#whitespace--no-multiple-blanks) Do not use multiple blank lines to pad your code.
+
+    ```javascript
+    // bad
+    if (isFeed) {
+
+      var cards = feed.querySelectorAll('.videoCube');
+
+
+      cards[0].style.margin = 'none';
+    }
+
+    // good
+    if (isFeed) {
+      var cards = feed.querySelectorAll('.videoCube');
+      cards[0].style.margin = 'none';
+    }
+    ```
+
+  <a name="whitespace--in-parens"></a><a name="16.9"></a>
+  - [16.9](#whitespace--in-parens) Do not add spaces inside parentheses.
+
+    ```javascript
+    // bad
+    function bar( foo ) {
+      return foo;
+    }
+
+    // good
+    function bar(foo) {
+      return foo;
+    }
+
+    // bad
+    if ( foo ) {
+      console.log(foo);
+    }
+
+    // good
+    if (foo) {
+      console.log(foo);
+    }
+    ```
+
+  <a name="whitespace--in-brackets"></a><a name="16.10"></a>
+  - [16.10](#whitespace--in-brackets) Do not add spaces inside brackets.
+
+    ```javascript
+    // bad
+    var foo = [ 1, 2, 3 ];
+    console.log(foo[ 0 ]);
+
+    // good
+    var foo = [1, 2, 3];
+    console.log(foo[0]);
+    ```
+
+  <a name="whitespace--in-braces"></a><a name="16.11"></a>
+  - [16.11](#whitespace--in-braces) Add spaces inside curly braces.
+
+    ```javascript
+    // bad
+    var foo = {clark: 'kent'};
+
+    // good
+    var foo = { clark: 'kent' };
+    ```
+
+  <a name="whitespace--max-len"></a><a name="16.12"></a>
+  - [16.12](#whitespace--max-len) Avoid having lines of code that are longer than 100 characters (including whitespace). Note: per [above](#strings--line-length), long strings are exempt from this rule, and should not be broken up.
+
+    > Why? This ensures readability and maintainability.
+
+    ```javascript
+    // bad
+    var foo = jsonData && jsonData.foo && jsonData.foo.bar && jsonData.foo.bar.baz && jsonData.foo.bar.baz.quux && jsonData.foo.bar.baz.quux.xyzzy;
+
+    // good
+    var feedCard = jsonData
+      && jsonData.foo
+      && jsonData.foo.bar
+      && jsonData.foo.bar.baz
+      && jsonData.foo.bar.baz.quux
+      && jsonData.foo.bar.baz.quux.xyzzy;
+    ```
+
+  <a name="whitespace--block-spacing"></a>
+  - [16.13](#whitespace--block-spacing) Require consistent spacing inside an open block token and the next token on the same line. This rule also enforces consistent spacing inside a close block token and previous token on the same line.
+
+    ```javascript
+    // bad
+    function foo() {return true;}
+    if (foo) { bar = 0;}
+
+    // good
+    function foo() { return true; }
+    if (foo) { bar = 0; }
+    ```
+
+  <a name="whitespace--comma-spacing"></a>
+  - [16.14](#whitespace--comma-spacing) Avoid spaces before commas and require a space after commas.
+
+    ```javascript
+    // bad
+    var foo = 1,bar = 2;
+    var arr = [1 , 2];
+
+    // good
+    var foo = 1, bar = 2;
+    var arr = [1, 2];
+    ```
+
+  <a name="whitespace--computed-property-spacing"></a>
+  - [16.15](#whitespace--computed-property-spacing) Enforce spacing inside of computed property brackets.
+
+    ```javascript
+    // bad
+    obj[foo ]
+    obj[ 'foo-bar']
+    obj[foo[ bar ]]
+
+    // good
+    obj[foo]
+    obj['foo-bar']
+    obj[foo[bar]]
+    ```
+
+  <a name="whitespace--func-call-spacing"></a>
+  - [16.16](#whitespace--func-call-spacing) Avoid spaces between functions and their invocations.
+
+    ```javascript
+    // bad
+    func ();
+
+    func
+    ();
+
+    // good
+    func();
+    ```
+
+  <a name="whitespace--key-spacing"></a>
+  - [16.17](#whitespace--key-spacing) Enforce spacing between keys and values in object literal properties.
+
+    ```javascript
+    // bad
+    var obj = { "foo" : 42 };
+    var obj2 = { "foo":42 };
+
+    // good
+    var obj = { "foo": 42 };
+    ```
+
+  <a name="whitespace--no-trailing-spaces"></a>
+  - [16.18](#whitespace--no-trailing-spaces) Avoid trailing spaces at the end of lines.
+
+  <a name="whitespace--no-multiple-empty-lines"></a>
+  - [16.19](#whitespace--no-multiple-empty-lines) Avoid multiple empty lines, only allow one newline at the end of files, and avoid a newline at the beginning of files.
+
+    ```javascript
+    // bad - multiple empty lines
+    var x = 1;
+
+
+    var y = 2;
+
+    // bad - 2+ newlines at end of file
+    var x = 1;
+    var y = 2;
+
+
+    // bad - 1+ newline(s) at beginning of file
+
+    var x = 1;
+    var y = 2;
+
+    // good
+    var x = 1;
+    var y = 2;
+
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Commas
+
+<a name="commas--leading-trailing"></a><a name="17.1"></a>
+  - [17.1](#commas--leading-trailing) Leading commas: **Nope.**
+
+    ```javascript
+    // bad
+    var story = [
+        once
+      , upon
+      , aTime
+    ];
+
+    // good
+    var story = [
+      once,
+      upon,
+      aTime,
+    ];
+
+    // bad
+    var hero = {
+        firstName: 'Ada'
+      , lastName: 'Lovelace'
+      , birthYear: 1815
+      , superPower: 'computers'
+    };
+
+    // good
+    var hero = {
+      firstName: 'Ada',
+      lastName: 'Lovelace',
+      birthYear: 1815,
+      superPower: 'computers',
+    };
+    ```
+
+  <a name="commas--dangling"></a><a name="17.2"></a>
+  - [17.2](#commas--dangling) Additional trailing comma: **Yup.** But only for objects, not for functions. Trailing commas in functions are not supported in IE.
+
+    > Why? This leads to cleaner git diffs (if you are using git to track your hook changes). It also makes it easier to add properties to the object.
+
+    ```diff
+    // bad - git diff without trailing comma
+    var hero = {
+         firstName: 'Florence',
+    -    lastName: 'Nightingale'
+    +    lastName: 'Nightingale',
+    +    inventorOf: ['coxcomb chart', 'modern nursing']
+    };
+
+    // good - git diff with trailing comma
+    var hero = {
+         firstName: 'Florence',
+         lastName: 'Nightingale',
+    +    inventorOf: ['coxcomb chart', 'modern nursing'],
+    };
+    ```
+
+    ```javascript
+    // bad
+    var hero = {
+      firstName: 'Dana',
+      lastName: 'Scully'
+    };
+
+    var heroes = [
+      'Batman',
+      'Superman'
+    ];
+
+    // good
+    var hero = {
+      firstName: 'Dana',
+      lastName: 'Scully',
+    };
+
+    var heroes = [
+      'Batman',
+      'Superman',
+    ];
+
+    // bad
+    function createHero(
+      firstName,
+      lastName,
+      inventorOf,
+    ) {
+      // does nothing
+    }
+
+    // good
+    function createHero(
+      firstName,
+      lastName,
+      inventorOf
+    ) {
+      // does nothing
+    }
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Semicolons
+
+  <a name="semicolons--required"></a><a name="18.1"></a>
+  - [18.1](#semicolons--required) **Yup.**
+
+    > Why? When JavaScript encounters a line break without a semicolon, it uses a set of rules called [Automatic Semicolon Insertion](https://tc39.github.io/ecma262/#sec-automatic-semicolon-insertion) to determine whether or not it should regard that line break as the end of a statement, and (as the name implies) place a semicolon into your code before the line break if it thinks so. ASI contains a few eccentric behaviors, though, and your code will break if JavaScript misinterprets your line break. These rules will become more complicated as new features become a part of JavaScript. Explicitly terminating your statements and configuring your linter to catch missing semicolons will help prevent you from encountering issues.
+
+    ```javascript
+    // bad - raises exception
+    var luke = {}
+    var leia = {}
+    [luke, leia].forEach(function (jedi) { jedi.father = 'vader' })
+
+    // bad - raises exception
+    var reaction = "No! That’s impossible!"
+    (async function meanwhileOnTheFalcon() {
+      // handle `leia`, `lando`, `chewie`, `r2`, `c3p0`
+      // ...
+    }())
+
+    // bad - returns `undefined` instead of the value on the next line - always happens when `return` is on a line by itself because of ASI!
+    function foo() {
+      return
+        'search your feelings, you know it to be foo'
+    }
+
+    // good
+    var luke = {};
+    var leia = {};
+    [luke, leia].forEach(function (jedi) {
+      jedi.father = 'vader';
+    });
+
+    // good
+    var reaction = "No! That’s impossible!";
+    (async function meanwhileOnTheFalcon() {
+      // handle `leia`, `lando`, `chewie`, `r2`, `c3p0`
+      // ...
+    }());
+
+    // good
+    function foo() {
+      return 'search your feelings, you know it to be foo';
+    }
+    ```
+
+    [Read more](https://stackoverflow.com/questions/7365172/semicolon-before-self-invoking-function/7365214#7365214).
+
+**[⬆ back to top](#table-of-contents)**
+
+## Type Casting & Coercion
+
+  <a name="coercion--explicit"></a><a name="19.1"></a>
+  - [19.1](#coercion--explicit) Perform type coercion at the beginning of the statement.
+
+  <a name="coercion--strings"></a><a name="19.2"></a>
+  - [19.2](#coercion--strings) Strings:
+
+    ```javascript
+    // => this.reviewScore = 9;
+
+    // bad
+    var totalScore = new String(this.reviewScore); // typeof totalScore is "object" not "string"
+
+    // bad
+    var totalScore = this.reviewScore + ''; // invokes this.reviewScore.valueOf()
+
+    // bad
+    var totalScore = this.reviewScore.toString(); // isn’t guaranteed to return a string
+
+    // good
+    var totalScore = String(this.reviewScore);
+    ```
+
+  <a name="coercion--numbers"></a><a name="19.3"></a>
+  - [19.3](#coercion--numbers) Numbers: Use `Number` for type casting and `parseInt` always with a radix for parsing strings.
+
+    ```javascript
+    var inputValue = '4';
+
+    // bad
+    var val = new Number(inputValue);
+
+    // bad
+    var val = +inputValue;
+
+    // bad
+    var val = inputValue >> 0;
+
+    // bad
+    var val = parseInt(inputValue);
+
+    // good
+    var val = Number(inputValue);
+
+    // good
+    var val = parseInt(inputValue, 10);
+    ```
+
+  <a name="coercion--comment-deviations"></a><a name="19.4"></a>
+  - [19.4](#coercion--comment-deviations) If for whatever reason you are doing something wild and `parseInt` is your bottleneck and need to use Bitshift for [performance reasons](https://jsperf.com/coercion-vs-casting/3), leave a comment explaining why and what you’re doing.
+
+    ```javascript
+    // good
+    /**
+     * parseInt was the reason my code was slow.
+     * Bitshifting the String to coerce it to a
+     * Number made it a lot faster.
+     */
+    var val = inputValue >> 0;
+    ```
+
+  <a name="coercion--bitwise"></a><a name="19.5"></a>
+  - [19.5](#coercion--bitwise) **Note:** Be careful when using bitshift operations. Numbers are represented as [64-bit values](https://es5.github.io/#x4.3.19), but bitshift operations always return a 32-bit integer ([source](https://es5.github.io/#x11.7)). Bitshift can lead to unexpected behavior for integer values larger than 32 bits. [Discussion](https://github.com/airbnb/javascript/issues/109). Largest signed 32-bit Int is 2,147,483,647:
+
+    ```javascript
+    2147483647 >> 0; // => 2147483647
+    2147483648 >> 0; // => -2147483648
+    2147483649 >> 0; // => -2147483647
+    ```
+
+  <a name="coercion--booleans"></a><a name="19.6"></a>
+  - [19.6](#coercion--booleans) Booleans:
+
+    ```javascript
+    var age = 0;
+
+    // bad
+    var hasAge = new Boolean(age);
+
+    // good
+    var hasAge = Boolean(age);
+
+    // best
+    var hasAge = !!age;
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Naming Conventions
+
+  <a name="naming--descriptive"></a><a name="20.1"></a>
+  - [20.1](#naming--descriptive) Avoid single letter names. Be descriptive with your naming.
+
+    ```javascript
+    // bad
+    function q() {
+      // ...
+    }
+
+    // good
+    function query() {
+      // ...
+    }
+
+    // bad
+    var even = Array.prototype.slice.call(box.querySelectorAll('.videoCube')).filter(function (el, idx) { return idx % 2 === 0 })
+
+    // good
+    var isEven = function isEven(element, idx) {
+        return idx % 2 === 0;
+    }
+    var widgetSlots = box.querySelectorAll('.videoCube')
+    var evenSlots = Array.prototype.filter.call(widgetSlots, isEven)
+    ```
+
+  <a name="naming--camelCase"></a><a name="20.2"></a>
+  - [20.2](#naming--camelCase) Use camelCase when naming objects, functions, and instances.
+
+    ```javascript
+    // bad
+    var OBJEcttsssss = {};
+    var this_is_my_object = {};
+    function c() {}
+
+    // good
+    var thisIsMyObject = {};
+    function thisIsMyFunction() {}
+    ```
 
 # };
+
+
