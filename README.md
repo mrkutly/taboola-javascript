@@ -2030,8 +2030,8 @@
     var slotArr = Array.apply(null, widgetSlots);
     ```
  
-  <a name="the-dom--node-lists-and-html-element-collections"></a><a name="21.3"></a>
-  - [21.3](#the-dom--node-lists-and-html-element-collections) Use Function.prototype.call to call Array.prototype methods on NodeLists and HTMLElementCollections.
+  <a name="the-dom--node-lists-and-html-element-collections"></a><a name="21.4"></a>
+  - [21.4](#the-dom--node-lists-and-html-element-collections) Use Function.prototype.call to call Array.prototype methods on NodeLists and HTMLElementCollections.
 
     > Why? If you need to map, filter, reduce, or iterate over (forEach) an NodeList or HTMLElementCollection, this saves you from creating an intermediate array.
 
