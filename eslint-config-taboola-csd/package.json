@@ -1,7 +1,10 @@
 {
   "name": "eslint-config-taboola-csd",
-  "version": "1.0.0",
+  "version": "1.0.01",
   "description": "Eslint configurations for Taboola CSD",
+  "repository": {
+    "url": "https://github.com/mrkutly/taboola-javascript"
+  },
   "main": "index.js",
   "peerDependencies": {
     "eslint": "^6.8.0"
