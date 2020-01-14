@@ -2051,7 +2051,7 @@
     }
 
     var titleTags = box.querySelectorAll('.video-title');
-    var titles = Array.prototype.map.call(titleTags, getTitle);
+    var titles = Array.prototype.map.call(titleTags, getText);
     ```
 
 ## ECMAScript 5 Compatibility
