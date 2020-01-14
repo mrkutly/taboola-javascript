@@ -3,6 +3,7 @@
     "editor.formatOnPaste": false,
     "workbench.colorCustomizations": {
         "activityBar.background": "#e8f7a2",
+        "activityBar.activeBorder": "#12accd",
         "activityBar.foreground": "#15202b",
         "activityBar.inactiveForeground": "#15202b99",
         "activityBarBadge.background": "#12accd",

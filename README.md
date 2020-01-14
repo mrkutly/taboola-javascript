@@ -602,7 +602,7 @@
 ## Iterators
 
   <a name="iterators--nope"></a><a name="8.1"></a>
-  - [8.1](#iterators--nope) Don’t use iterators. Prefer JavaScript’s higher-order functions instead of loops like `for-in` or `for-of`.
+  - [8.1](#iterators--nope) Don’t use iterators if you don't have to. Prefer JavaScript’s higher-order functions instead of loops like `for-in` or `for-of`.
 
     > Why? This enforces our immutable rule. Dealing with pure functions that return values is easier to reason about than side effects.
 
